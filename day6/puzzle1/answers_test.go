@@ -1,46 +1,6 @@
 package main
 
-import (
-	"bufio"
-	"strings"
-	"testing"
-)
-
-func TestScanPassport(t *testing.T) {
-	testCases := []struct {
-		name        string
-		batch       string
-		wantAnswers int
-	}{
-		{
-			name:        "OneAnswer",
-			batch:       "a",
-			wantAnswers: 1,
-		},
-		{
-			name:        "ThreeAnswers",
-			batch:       "abc\n\na\nb\nc\n\nab\nnac",
-			wantAnswers: 3,
-		},
-	}
-
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			r := strings.NewReader(tc.batch)
-			s := bufio.NewScanner(r)
-			s.Split(ScanAnswers)
-
-			var gotAnswers int
-			for ; s.Scan(); gotAnswers++ {
-				//t.Logf("%q\n", s.Text())
-			}
-
-			if gotAnswers != tc.wantAnswers {
-				t.Errorf("Scan() = got %d answers; want %d.", gotAnswers, tc.wantAnswers)
-			}
-		})
-	}
-}
+import "testing"
 
 func TestCountYesAnswer(t *testing.T) {
 	testCases := []struct {
